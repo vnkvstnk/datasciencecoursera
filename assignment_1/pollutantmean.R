@@ -13,16 +13,10 @@ pollutantmean <- function(directory, pollutant, id=1:332){
     ## in the 'id' vector (ignoring NA values)
     library(data.table)
     values <- numeric(0)    # variable for pollutant values
-    for (i in id) {
-        if (i < 10){
-            i <- paste("00", i, ".csv", sep="")
-        } else if (i < 100 & i >=10) {
-            i <- paste("0", i, ".csv", sep="")
-        } else {
-            i <- paste(i, ".csv", sep="")
-        }
-        filename <- file.path(directory, i, fsep=.Platform$file.sep)
-        x <- fread(file=filename, sep=",", select=pollutant, data.table=FALSE)
+    files <- sort(dir(directory))[id]
+    for (i in seq_along(id)) {
+        filename <- file.path(directory, files[i], fsep=.Platform$file.sep)
+        x <- fread(file=filename, sep=",", select=pollutant)
         x <- x[[pollutant]]
         x <- x[!is.na(x)]
         values <- append(values, x)
