@@ -21,20 +21,26 @@ names <- features$V2[foi]
 names <- gsub("-mean\\(\\)", "Mean", names) %>% gsub(pattern="-std\\(\\)", replacement="Std") %>%
     gsub(pattern="-", replacement = "")
 
-# Read test dataset
+# Importing activity and subject vectors for test and train sets
 activity_test <- fread(path_to_ytest) %>% as_tibble()
 subject_test <- fread(path_to_subj_test) %>% as_tibble()
-x_test <- fread(path_to_xtest, select = foi) %>% as_tibble() %>%
-    setNames(names) %>% mutate(activity = activity_test$V1, subject = subject_test$V1, set = "TEST")
-
-# Read train dataset
 activity_train <- fread(path_to_ytrain) %>% as_tibble()
 subject_train <- fread(path_to_subj_train) %>% as_tibble()
+
+# Importing test and train dataset, adding activity, subject and set variables
+x_test <- fread(path_to_xtest, select = foi) %>% as_tibble() %>%
+    setNames(names) %>% mutate(activity = activity_test$V1, subject = subject_test$V1, set = 0)
 x_train <- fread(path_to_xtrain, select = foi) %>% as_tibble() %>%
-    setNames(names) %>% mutate(activity = activity_train$V1, subject = subject_train$V1, set = "TRAIN")
+    setNames(names) %>% mutate(activity = activity_train$V1, subject = subject_train$V1, set = 1)
 
 # Merging datasets
 data <- bind_rows(x_test, x_train) %>% select(set:tBodyAccMeanX) %>%
-    mutate_at(c("set", "subject", "activity"), list(factor))
-data$activity <- recode_factor(data$activity, "1"="WALKING", "2"="WALKING_UP", "3"="WALKING_DOWN",
-                               "4"="SITTING", "5"="STANDING", "6"="LAYING")
+    group_by(subject, activity) %>%
+    summarize_all(funs(mean))
+
+# Give `activity` and `set` proper labels
+data$set <- factor(data$set, labels = c("TEST", "TRAIN"))
+data$activity <- factor(data$activity, labels = c("WALKING", "WALKING_UP", "WALKING_DOWN", "SITTING", "STANDING", "LAYING"))
+
+# Saving data
+fwrite(data, file = "./clean_data.csv", row.names = FALSE)
