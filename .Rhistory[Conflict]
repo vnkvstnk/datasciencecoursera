@@ -1,0 +1,512 @@
+class(sampleTimes[1])
+year(sampleTimes[1])
+sum(year(sampleTimes) == 2012)
+sum(day(sampleTimes) == 2)
+sum(day(sampleTimes) == 1)
+day(today())
+wday(today)
+wday(today())
+sum(wday(sampleTimes) == 2)
+sum(wday(sampleTimes) == 2 & year(sampleTimes) == 2012)
+setwd("F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/dataset/test")
+rm(list=ls())
+data <- read.table("X_test.txt", header = FALSE, sep=" ")
+data <- read.table("X_test.txt", header = FALSE, sep=" ")
+data <- read.table("X_test.txt", header = FALSE, sep=" ", fill = TRUE)
+library(dplyr)
+data <- as_tibble(data)
+data
+rm(data)
+setwd("D:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment")
+path_subj_test <- ".\\dataset\\test\\subject_test.txt"
+subj_test <- read.table(path_subj_test)
+unique(subj_test)
+length(unique(subjtest))
+length(unique(subj_test))
+length(unique(subj_test$V1))
+2947/9
+path_x_test <- ".\\dataset\\test\\X_test.txt"
+?fread
+library(data.table)
+?fread
+rm(gdp)
+rm(total)
+x_test <- fread(path_x_test)
+install.packages("dplyr")
+library(dplyr)
+x_test <- as_tibble(x_test)
+x_test
+x_test$V1[1]
+class(x_test$V1[1])
+class(x_test$V2[1])
+x_test$V2[1]
+x_test$V2[1] + 0.02328523
+?size
+path_y_test <- ".\\dataset\\test\\y_test.txt"
+y_test <- fread(path_y_test)
+class(subj_test)
+subj_test
+class(x_test)
+x_test
+path_features <- ".\\dataset\\features.txt"
+features <- read.table(path_features)
+head(features)
+head(y_test)
+unique(y_test$V1)
+unique(subj_test)
+unique(subj_test$V1)
+rm(features)
+features <- read.table(path_features)
+unique(features$V2)
+dim(features)
+len(unique(features$V1))
+length(unique(features$V1))
+length(unique(features$V2))
+head(features)
+duplicated(features$V2)
+features$V2[duplicated(features$V2)]
+str(features)
+table(features$V2)
+c_occur <- table(features$V2)
+summary(c_occur)
+c_occur[c_occur$Freq > 1, ]
+c_occur <- data.frame(c_occur)
+str(c_occur)
+c_occur[c_occur$Freq > 1, ]
+rm(list=ls())
+path_to_features <- file.path("dataset", "features.txt", sep=.Platform$file.sep)
+.Platform$file.sep
+?file.path
+library(dplyr)
+source('D:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/import_data.R')
+setwd("F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment")
+rm(list=ls())
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/import_data.R')
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/import_data.R')
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/import_data.R')
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/import_data.R')
+sum(g)
+which(grepl("mean|std", tolower(features$V2)))
+?fread
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/import_data.R')
+str(x_test)
+?rename
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/import_data.R')
+features$V2[foi]
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/import_data.R')
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/import_data.R')
+x_test
+names(x_test)
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/import_data.R')
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/import_data.R')
+?rename_at
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/import_data.R')
+features$V2[foi]
+class(features$V2[foi])
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/import_data.R')
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/import_data.R')
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/import_data.R')
+names(x_test)
+str(x_test)
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/import_data.R')
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/import_data.R')
+grepl("mean|std", tolower(features$V2))
+names(x_test)
+unique(y_test)
+?mutate
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/import_data.R')
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/import_data.R')
+rm(list=ls())
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/import_data.R')
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/import_data.R')
+class(y_test)
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/import_data.R')
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/import_data.R')
+class(y_test)
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/import_data.R')
+unique(x_test$act)
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/import_data.R')
+unique(x_test$sub)
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/import_data.R')
+object.size(x_test)
+object.size(x_train)
+swirl()
+library(swirl)
+swirl()
+swirl()
+library(tidyr)
+students
+?gather
+gather(students, sex, count, -grade)
+students2
+res <- gather(student2, sex_class, count, -grade)
+res <- gather(students2, sex_class, count, -grade)
+res
+?separate
+separate(res, sex_class, c("sex", "class"))
+submit()
+students3
+submit()
+?spread
+submit()
+library(readr)
+parse_number("class5")
+submit()
+students3
+students4
+submit()
+submit()
+submit()
+passed
+failed
+passed <- mutate(status = "passed")
+passed <- mutate(passed, status = "passed")
+failed <- mutate(failed, status = "failed")
+?bind_rows
+bind_rows(passed, failed)
+play()
+bind_rows(passed, failed, id = status)
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/import_data.R')
+rm(list=ls())
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/import_data.R')
+unique(data$set)
+names(data)
+plot(data$`tBodyAcc-mean()-X`)
+plot(data$`tBodyGyroJerk-mean()-Z`)
+plot(data$`tBodyGyroJerk-mean()-Z`, type = "l")
+plot(data$`fBodyAccMag-mean()`, type = "l")
+?separate
+help(package="readr")
+swirl()
+help()
+0
+info()
+bye()
+swirl()
+library(tidyr)
+students
+?gather
+gather(students, sex, count, -grade)
+students2
+res <- gather(students2, sex_class, count)
+res <- gather(students2, sex_class, count, -grade)
+res
+?separate
+separate(res, sex_class, c("sex", "class"))
+buy()
+bye()
+?gather
+rm(list = ls())
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/import_data.R')
+test_data <- gather(data, all_vars, val, -act, -sub, -set)
+10299*86
+test_data
+features$V2[foi]
+?separate
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/import_data.R')
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/import_data.R')
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/import_data.R')
+?grep
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/import_data.R')
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/import_data.R')
+885714*5
+1029*89
+object.size(test_data)
+object.size(test_data)/1000000
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/import_data.R')
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/import_data.R')
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/import_data.R')
+rm(list=ls())
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/import_data.R')
+rm(list=ls())
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/import_data.R')
+?grepl
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/import_data.R')
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/import_data.R')
+?separate
+?gsub
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/import_data.R')
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/import_data.R')
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/import_data.R')
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/import_data.R')
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/import_data.R')
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/import_data.R')
+test_data
+head(test_data)
+head(test_data, 40)
+View(test_data$all_vars)
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/import_data.R')
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/import_data.R')
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/import_data.R')
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/clear_data.R')
+setwd("F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment")
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/clear_data.R')
+rm(list=ls())
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/clear_data.R')
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/clear_data.R')
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/clear_data.R')
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/clear_data.R')
+names
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/clear_data.R')
+names
+foai <- which(grepl("mean|std", tolower(features$V2)))
+features$V2[foai]
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/clear_data.R')
+rm(list=ls())
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/clear_data.R')
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/clear_data.R')
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/clear_data.R')
+?fread
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/clear_data.R')
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/clear_data.R')
+activity_test[1]
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/clear_data.R')
+unique(names)
+length(unique(features$V2))
+duplicated(features$V2)
+features$V2[duplicated(features$V2)]
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/clear_data.R')
+rm(list=ls())
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/clear_data.R')
+length(names)
+length(unique(names))
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/clear_data.R')
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/clear_data.R')
+length(names)
+length(unique(names))
+names(duplicated(names))
+names[duplicated(names)]
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/clear_data.R')
+length(names)
+length(unique(names))
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/clear_data.R')
+length(names)
+length(unique(names))
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/clear_data.R')
+length(names)
+length(unique(names))
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/clear_data.R')
+length(names)
+length(unique(names))
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/clear_data.R')
+length(names)
+length(unique(names))
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/clear_data.R')
+x_test
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/clear_data.R')
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/clear_data.R')
+?bind_rows
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/clear_data.R')
+rm(list=ls())
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/clear_data.R')
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/clear_data.R')
+?arrange
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/clear_data.R')
+table(data$subject, data$activity)
+data
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/clear_data.R')
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/clear_data.R')
+data
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/clear_data.R')
+data
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/clear_data.R')
+data
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/clear_data.R')
+data
+table(data$activity, data$subject)
+data[data$subject == 1, ]
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/clear_data.R')
+help("dplyr")
+?mutate_at
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/clear_data.R')
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/clear_data.R')
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/clear_data.R')
+table(data$subject, data$mode)
+table(data$subject, data$activity)
+?recode
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/clear_data.R')
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/clear_data.R')
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/clear_data.R')
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/clear_data.R')
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/clear_data.R')
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/clear_data.R')
+filter(data, subject == 1)
+foai <- which(grepl("mean|std", tolower(features$V2)))
+features$V2[foai]
+length(names)
+names
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/clear_data.R')
+names
+rm(list=ls())
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/clear_data.R')
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/clear_data.R')
+setwd("D:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment")
+source('D:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/clear_data.R')
+table(data$subject, data$activity)
+table(data$subject, data$activity, data$set)
+table(data$subject, data$activity)
+setwd("F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment")
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/clear_data.R')
+?group_by
+grouped <- group_by(data, activity, subject)
+?summarize
+summ <- summarize(grouped, mean = mean(select(grouped, -(set, subject, activity_test))))
+summ <- summarize(grouped, mean = mean(select(grouped, -set, -subject, -activity_test)))
+library(swirl)
+seirl()
+swirl()
+library(dplyr)
+cran <- tbl_df(mydf)
+rm("mydf")
+cran
+?group_by
+by_package <- group_by(cran, package)
+by_package
+summarize(by_package, mean(size))
+submit
+submit()
+pack_sum
+View(pack_sum)
+grouped
+s <- summarise_all(grouped, funs(mean))
+s
+?summarize_is
+?summarize_if
+?funs
+is.numeric(s$fBodyBodyGyroJerkMagStd)
+is.numeric(s$set)
+is.numeric(s$subject)
+is.numeric(grouped$set)
+s <- summarize_at(grouped, is.numeric, mean)
+s <- summarize_at(grouped, is.numeric, mean())
+s <- summarize_at(grouped, is.numeric, funs(mean))
+s <- summarize_if(grouped, is.numeric, funs(mean))
+s
+table(data$subject, data$activity)
+is.numeric(1)
+is.numeric(1L)
+rm(list=ls())
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/clear_data.R')
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/clear_data.R')
+data
+mean(data$set)
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/clear_data.R')
+mean(data$set)
+s <- summarise(data, mean())
+s <- summarise(data, funs(mean))
+s
+s <- summarise(data, mean = mean)
+s <- summarise_if(data, is.numeric, funs(mean))
+s
+filter(s$subject, set == 0)
+s$subject[s$set==0]
+unique(s$subject[s$set==0])
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/clear_data.R')
+unique(data$subject[data$set==0])
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/clear_data.R')
+s <- summarise_all(data, funs(mean))
+s
+?mutate_at
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/clear_data.R')
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/clear_data.R')
+warnings()
+data
+str(data)
+length(unique(data$subject[data$set=="TEST"]))
+length(unique(data$subject[data$set=="TEST"])) / 30
+help(package="data.table")
+write.csv(data, file = "./clean_data.csv")
+my_data <- read.csv("./clean_data.csv")
+rm(my_data)
+write.csv(data, file = "./clean_data.csv", row.names = FALSE)
+my_data <- read.csv("./clean_data.csv")
+my_data == data
+sum(my_data$subject != data$subject)
+sum(my_data$activity != data$activity)
+sum(my_data$set != data$set)
+sum(my_data$fBodyAccJerkMeanX != data$fBodyAccJerkMeanX)
+View(data)
+View(my_data)
+my_data <- as_tibble(my_data)
+View(my_data)
+View(my_data)
+sum(sort(my_data$fBodyAccJerkMeanX) != sort(data$fBodyAccJerkMeanX))
+data$fBodyBodyGyroJerkMagStd[1]
+my_data$fBodyBodyGyroJerkMagStd[1]
+data$fBodyBodyGyroJerkMagStd[1] == my_data$fBodyBodyGyroJerkMagStd[1]
+class(data$fBodyBodyGyroJerkMagStd[1])
+class(my_data$fBodyBodyGyroJerkMagStd[1])
+?read.table
+object.size(data)
+object.size(data) / 1000000
+levels(data$activity)
+rm(list=ls())
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/clear_data.R')
+warnings()
+data
+data
+levels(data$activity)
+levels(data$activity) <- c("WALKING", "WALKING_UP", "WALKING_DOWN", "SITTING","STANDING", "LAYING")
+levels(data$activity)
+data$activity[1] > data$activity[2]
+?levels
+data
+table(data$subject, data$activity)
+mutate_at("set", list(factor))
+mutate_at(data, "set", list(factor))
+warnings()
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/clear_data.R')
+rm(list=ls())
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/clear_data.R')
+levels(data$set)
+data
+sum(data$set=="TEST") / length(data$set)
+sum(data$set==TEST) / length(data$set)
+sum(data$set=="TRAIN") / length(data$set)
+# Saving data
+write.csv(data, file = "./clean_data.csv", row.names = FALSE)
+my_data <- read.csv("./clean_data.csv")
+str(my_data)
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/clear_data.R')
+data
+data$activity
+levels(data$activity) <- c("WALKING", "WALKING_UP", "WALKING_DOWN", "SITTING", "STANDING", "LAYING")
+data$activity
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/clear_data.R')
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/clear_data.R')
+data$activity
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/clear_data.R')
+data
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/clear_data.R')
+data
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/clear_data.R')
+data
+# Give activities and set proper labels
+data$set <- factor(data$set, levels = 0:1, labels = c("TEST", "TRAIN"))
+data
+sum(data$set=="TRAIN") / 180
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/clear_data.R')
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/clear_data.R')
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/clear_data.R')
+sum(data$set=="TRAIN") / 180
+sum(data$set=="TEST") / 180
+# Saving data
+write.csv(data, file = "./clean_data.csv", row.names = FALSE)
+my_data <- read.csv("clean_data.csv")
+object.size(data)
+object.size(my_data)
+View(table(data$subject, data$activity))
+table(data$subject, data$activity)
+dim(table(data$subject, data$activity))
+rm(list=ls())
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/clear_data.R')
+?write.csv
+help(package="data.table")
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/clear_data.R')
+fread("./clean_data.csv", header = T, sep=",")
+ddd <- fread("./clean_data.csv", header = T, sep=",")
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/clear_data.R')
+ddd <- fread("./clean_data.csv", header = T, sep=",")
+source('F:/GoogleDrive/personal/programming/R/datasciencecoursera/Course_3_Getting_and_cleaning_data/assignment/clear_data.R')
+mean("adf", "asdf")
+unique(data$activity)

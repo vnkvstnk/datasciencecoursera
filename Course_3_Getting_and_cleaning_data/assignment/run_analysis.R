@@ -40,7 +40,7 @@ data <- bind_rows(x_test, x_train) %>% select(set:tBodyAccMeanX) %>%
 
 # Give `activity` and `set` proper labels
 data$set <- factor(data$set, labels = c("TEST", "TRAIN"))
-data$activity <- factor(data$activity, labels = c("WALKING", "WALKING_UP", "WALKING_DOWN", "SITTING", "STANDING", "LAYING"))
+data$activity <- factor(data$activity, labels = c("WALKING", "WALKING_UPSTAIRS", "WALKING_DOWNSTAIRS", "SITTING", "STANDING", "LAYING"))
 
 # Saving data
-fwrite(data, file = "./clean_data.csv", row.names = FALSE)
+write.table(data, file = "./clean_data.txt", row.names = FALSE)
