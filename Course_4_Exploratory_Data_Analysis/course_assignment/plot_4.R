@@ -1,25 +1,26 @@
 # Loading packages
-library(ggplot2)
 library(dplyr)
 
 # Importing data
-if (!exists("nei")) nei <- readRDS("summarySCC_PM25.rds") %>% as_tibble() %>% filter(Emissions != max(Emissions))
-if (!exists("scc")) scc <- readRDS("Source_Classification_Code.rds") %>% as_tibble()
+nei <- readRDS("summarySCC_PM25.rds") %>% as_tibble()
+scc <- readRDS("Source_Classification_Code.rds") %>% as_tibble()
 
 # Selecting scc-codes for coal combustion-related sources of emission
 coal_idx <- grep("comb .* coal", as.character(scc$EI.Sector), ignore.case = TRUE)
 coal_codes <- unique(as.character(scc$SCC[coal_idx]))
 
 # Subsetting
-coal_em <- nei %>% filter(SCC %in% coal_codes)# %>% mutate(Emissions = log10(Emissions))
-by_year <- tapply(coal_em$Emissions, coal_em$year, mean, na.rm = TRUE)
+coal_em <- nei %>% filter(SCC %in% coal_codes) %>% group_by(year) %>%
+    summarise(sums = sum(Emissions), means = mean(Emissions),
+              medians = median(Emissions))
 
 
 # Plotting
-# ggplot(coal_em, aes(year, Emissions)) + geom_point(alpha = .33)
-# 
-# ggplot(coal_em, aes(year, Emissions)) + geom_boxplot(aes(group = year))
-    
-
-plot(as.integer(names(by_year)), by_year)
-boxplot(coal_em$Emissions ~ coal_em$year)
+png("plot_4.png", width = 1400, height = 470)
+par(mfrow = c(1, 3), cex.lab = 1.7, cex.axis = 1.7, oma = c(0, 0, 2.2, 0))
+with(coal_em, { plot(year, sums, pch = 19, cex = 3, ylab = "Total emission, t")
+              plot(year, means, pch = 19, cex = 3, ylab = "Average emission, t")
+              plot(year, medians, pch = 19, cex = 3, ylab = "Median emission, t")
+              })
+mtext(expression("Emission of PM"[2.5]* " in the US from coal combustion-related sources"), outer = TRUE, cex = 1.5)
+dev.off()

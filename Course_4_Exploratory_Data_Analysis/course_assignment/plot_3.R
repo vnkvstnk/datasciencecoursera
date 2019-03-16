@@ -3,14 +3,19 @@ library(ggplot2)
 library(dplyr)
 
 # Importing data
-if (!exists("nei")) nei <- readRDS("summarySCC_PM25.rds") %>% as_tibble() %>% mutate(type = factor(type))
-if (!exists("scc")) scc <- readRDS("Source_Classification_Code.rds") %>% as_tibble()
+nei <- readRDS("summarySCC_PM25.rds") %>% as_tibble()
+scc <- readRDS("Source_Classification_Code.rds") %>% as_tibble()
+
+# Subsetting
+em_balt <- nei %>% filter(fips == "24510") %>% group_by(year, type) %>% summarize(Emissions = sum(Emissions))
 
 # Plotting
-by_type <- nei %>% group_by(type, year) %>% summarize(emission = mean(Emissions, na.rm = TRUE))
+p <- ggplot(em_balt, aes(as.factor(year), Emissions)) + 
+    geom_point(size = 4) +
+    facet_wrap(.~type, scales = "free_y") +
+    labs(x = "Year", y = "Emission, t", title = expression("Total annual emission of PM"[2.5]* " in the US by source"))
 
-
-ggplot(by_type, aes(year, emission)) + geom_point(size = 5) + geom_smooth(method = "lm", se = FALSE) +
-    facet_wrap(. ~ type, scales = "free")
-
-# https://stackoverflow.com/questions/18046051/setting-individual-axis-limits-with-facet-wrap-and-scales-free-in-ggplot2
+# Saving
+png("plot_3.png", width = 700, height = 500)
+print(p)
+dev.off()

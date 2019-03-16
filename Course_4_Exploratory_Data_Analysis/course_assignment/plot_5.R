@@ -10,6 +10,13 @@ if (!exists("scc")) scc <- readRDS("Source_Classification_Code.rds") %>% as_tibb
 # Subsetting
 motor_em <- nei %>% filter(SCC %in% scc$SCC & fips == "24510")
 
-ggplot(motor_em, aes(as.factor(year), log10(Emissions))) + geom_boxplot(aes(group = year))
+# Plotting
+p <- ggplot(motor_em, aes(factor(year), Emissions)) + geom_boxplot(aes(group = year)) + scale_y_log10() +
+       labs(x = "Year", y = expression("Emission, log"[10]* "(t)"), 
+            title = expression("Emission of PM"[2.5]* " in the Baltimore City from motor vehicle sources"))
 
-t <- tapply(motor_em$Emissions, motor_em$year, median)
+# Saving
+png("plot_5.png", width = 1000)
+print(p)
+dev.off()
+
