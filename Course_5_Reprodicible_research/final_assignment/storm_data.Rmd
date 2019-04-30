@@ -1,0 +1,192 @@
+---
+title: "Economic and health consequences of severe weather events"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      comment = "")
+```
+
+## Synopsis  
+A short analysis of severe weather events occured in the US from 1950 to 2011 was carried out using the U.S. National Oceanic and Atmospheric Administration's (NOAA) storm database. Ten most harmful events with respect to population health along with events causing the greatest economic consequences were determined. Health damage was assessed using number of fatalities and injures caused by various events. Tornadoes were identified as most harmful weather conditions causing more then 5500 fatalities followed by excessive heat and floods. Economic consequences were divided into crop damage and property damage. Floods, typhoons and tornadoes, being the most destructive events, caused the most property damage while droughts, floods, hails and ice storms account for the largest part of crop damage.
+
+## Data Processing
+```{r}
+# Loading packages
+library(dplyr, warn.conflicts = FALSE)
+library(tidyr)
+library(ggplot2)
+
+# Downloading the dataset and reading in the data
+url = "https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2FStormData.csv.bz2"
+if (!file.exists("storm_data.csv")) {
+    download.file(url, destfile = "storm_data.csv")
+}
+sdata <- read.csv("storm_data.csv") %>%
+    as_tibble()
+```  
+
+Let's explore variable names and extract the variables relevant to our analysis:
+```{r}
+names(sdata)
+```
+As can be seen, economic consequences can be estimated using `PROPDMG` and `CROPDMG` variables along with the corresponding `*EXP` variables. Population health can be expressed with number of fatalities and injuries caused by different events (`FATALITIES` and `INJURIES` variables).  
+
+```{r}
+sdata <- select(sdata, EVTYPE, FATALITIES, INJURIES, CROPDMG, CROPDMGEXP, PROPDMG, PROPDMGEXP)
+summary(sdata)
+```
+
+While everything else looks logical, the way of interpreting `*EXP` variables remains unclear.
+Let's have a closer look at these variables:
+```{r}
+summary(sdata$PROPDMGEXP)
+summary(sdata$CROPDMGEXP)
+```
+From what we see, it's not obvious what we should do with the values, but luckily, there is a [post](https://rstudio-pubs-static.s3.amazonaws.com/58957_37b6723ee52b455990e149edde45e5b6.html) explaining how these values can be handled. Refer to the link for further details.   
+
+First, let's replace the values with actual numbers.
+```{r}
+exp_to_num <- function(var) {
+    var <- as.character(var)
+    var <- if_else(var %in% as.character(0:8), "10", var)
+    var <- if_else(var %in% c("-", "?", ""), "0", var)
+    var <- if_else(var %in% c("h", "H"), "100", var)
+    var <- if_else(var %in% c("k", "K"), "1e3", var)
+    var <- if_else(var %in% c("m", "M"), "1e6", var)
+    var <- if_else(var %in% c("b", "B"), "1e9", var)
+    var <- if_else(var == "+", "1", var)
+    as.numeric(var)
+}
+    
+sdata$PROPDMGEXP <- exp_to_num(sdata$PROPDMGEXP)
+sdata$CROPDMGEXP <- exp_to_num(sdata$CROPDMGEXP)
+```
+
+We now can calculate the actual damage by multiplying the variables containing damage values by respective exponent values:
+```{r}
+sdata <- mutate(sdata, PROPDMG = PROPDMG * PROPDMGEXP,
+                       CROPDMG = CROPDMG * CROPDMGEXP) %>%
+    # getting rid of exponent values
+    select(-ends_with("EXP"))
+```
+
+Finally, let's group the data by event type and summarize all other variables:   
+```{r}
+by_event <- sdata %>%
+    # Remove leading and trailing spaces from event type names
+    mutate(EVTYPE = trimws(EVTYPE)) %>%
+    group_by(EVTYPE) %>%
+    summarize_all(sum)
+```  
+
+## Results
+### Public health consequences
+To evaluate the influence of severe weather events on public health we should consider both, fatalities and injuries caused by the events. Let's create a separate variable containing relevant data only:
+```{r}
+health <- by_event %>%
+    select(1:3) %>%
+    # Creating separate variable with consequence type
+    gather(key = "TYPE", value = "COUNT", -EVTYPE) %>%
+    # Arranging in descending order for plotting purposes
+    arrange(desc(COUNT)) %>%
+    group_by(TYPE) %>%
+    # Let's keep ten most harmful events for each type of consequence
+    slice(1:10) %>%
+    ungroup() %>%
+    # Adding row numbers for plotting purposes
+    mutate(R = row_number())
+```  
+
+Now we can plot the data.    
+```{r}
+require(scales, quietly = TRUE)
+g <- ggplot(data = health,
+            aes(x = R,  # we use row numbers now to keep the data in order
+                y = COUNT)) +
+    geom_col() +
+    labs(x = "",
+         y = "Number of cases",
+         title = "Ten most harmful weather events with respect to population health") + 
+    facet_wrap(TYPE~.,
+               scales = "free",
+               nrow = 2) +
+    scale_x_reverse(breaks = health$R,
+                    # replacing row numbers with event type names
+                    labels = health$EVTYPE) +  
+    # Adding more tick labels
+    scale_y_continuous(breaks = pretty_breaks(n = 8),
+                       expand = c(.04, 0, .09, 0)) +
+    # Adding numerical values to the plot
+    geom_text(aes(label = COUNT),
+              size = 3,
+              vjust=.35,
+              hjust=-0.1,
+              color = "black") +
+    coord_flip()
+print(g)
+```     
+
+As can be seen, tornadoes caused the most fatalities and injuries, followed by excessive heat and flood events. Also, hail and ice storm caused a lot of injuries, but didn't appear in the most fatal events list.  
+Let's estimate the contribution of the shown events in total number of injuries and fatalities:
+```{r}
+total_dead <- sum(by_event$FATALITIES)
+total_inj <- sum(by_event$INJURIES)
+top_ten_dead <- sum(health$COUNT[health$TYPE == "FATALITIES"])
+top_ten_inj <- sum(health$COUNT[health$TYPE == "INJURIES"])
+fraction_dead <- round(top_ten_dead / total_dead * 100)
+fraction_injured <- round(top_ten_inj / total_inj * 100)
+```
+The shown events account for `r fraction_dead` % of fatalities and `r fraction_injured` % of injuries.
+
+### Economic consequences
+Let's create a separate variable following the procedure we employed in the previous case. We keep property and crop damages separated.  
+```{r}
+dmg <- by_event %>%
+    # Select relevant variables
+    select(c(1, 4, 5)) %>%
+    gather(key = "TYPE", value = "AMOUNT", -EVTYPE) %>%
+    arrange(desc(AMOUNT)) %>%
+    group_by(TYPE) %>%
+    # Keep ten most harmful events
+    slice(1:10) %>%
+    ungroup() %>%
+    mutate(R = row_number())
+```
+
+Let's now plot the data.   
+```{r}
+require(scales, quietly = TRUE)
+# Future facet labels
+labels <- c(CROPDMG="CROP DAMAGE", PROPDMG="PROPERTY DAMAGE")
+g <- ggplot(data = dmg,
+            aes(x = R,
+                y = AMOUNT)) +
+    geom_col() +
+    labs(x = "",
+         y = "Damage, dollars",
+         title = "Ten economically most harmful weather events") + 
+    facet_wrap(TYPE~.,
+               scales = "free",
+               nrow = 2,
+               labeller = labeller(TYPE = labels)) +
+    scale_x_reverse(breaks = dmg$R,
+                    labels = dmg$EVTYPE) + 
+    scale_y_continuous(breaks = pretty_breaks(n = 8),
+                       labels = scientific) +
+    coord_flip()
+print(g)
+```   
+
+As can be seen, the most destructive events, such as tornadoes and floods, cause the most property damage, while the weather events that affect crop yeild or can inflict physical damage on plants (i.e. drought, flood or hail) account for the largest part of the crop damage.  
+As in the case with health counsequences, let's have a look at the contribution of the shown events in total economic damage:
+```{r}
+total_propdmg <- sum(by_event$PROPDMG)
+total_cropdmg <- sum(by_event$CROPDMG)
+top_ten_propdmg <- sum(dmg$AMOUNT[dmg$TYPE == "PROPDMG"])
+top_ten_cropdmg <- sum(dmg$AMOUNT[dmg$TYPE == "CROPDMG"])
+fraction_prop <- round(top_ten_propdmg / total_propdmg * 100)
+fraction_crop <- round(top_ten_cropdmg / total_cropdmg * 100)
+```
+The shown events account for `r fraction_prop` % of property damage and `r fraction_crop` % of crop damage.
