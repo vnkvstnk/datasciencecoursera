@@ -1,0 +1,88 @@
+---
+title: "Final assignment of the Statistical Inference course. Part 2"
+author: "Ivan Tiunov"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+In this part of the final assignment we are going to analyze the ToothGrowth data and compare tooth growth by supplement and dose using t-tests.
+
+Required packages:
+```{r}
+library(ggplot2)
+library(dplyr, warn.conflicts = FALSE)
+```
+
+\section{1. Exploratory analyses of the data}
+
+```{r}
+data("ToothGrowth")
+dim(ToothGrowth)
+str(ToothGrowth)
+table(ToothGrowth$dose)
+```
+
+```{r, fig.height=3}
+ggplot(data = ToothGrowth, aes(x = dose, y = len)) + 
+    geom_boxplot(aes(group = dose)) + facet_grid(.~supp)
+```
+
+\section{2. Summary of the data}
+The data describe the length of odontoblasts (cells responsible for tooth growth) in 60 guinea pigs. Each animal received one of three dose levels of vitamin C (0.5, 1, and 2 mg/day) by one of two delivery methods, orange juice (`OJ`) or ascorbic acid (`VC`). Each dose-supplement combination consists of ten data points. We can see from the plot that tooth length seems to increase with higher dose of both supplements. We cas assume that the `OJ` has higher effect on tooth growth for doses 0.5 and 1 mg/day.
+
+\section{3. Comparison of tooth length by supplement and dose}
+We conduct a number of t-test to see which supplement has larger effect on tooth growth and if there is a statistical difference in tooth growth for different doses within each supplement.
+We assume independence and different variance between each of six groups in the study.
+```{r}
+knitr::kable(
+    group_by(ToothGrowth, dose, supp) %>%
+        summarise(Variance = round(var(len), 3)))
+```
+
+First, let's compare the effect of each supplement at the same dose. Our null hypothesis is that there is no difference between supplements. Alternative hypothesis is that supplement `OJ` has greater effect on tooth growth.
+```{r}
+d <- ToothGrowth  # to make name shorter
+supOJ <- d$supp == "OJ"
+supVC <- d$supp == "VC"
+
+sup.05 <- t.test(d$len[supOJ & d$dose == 0.5],
+                 d$len[supVC & d$dose == 0.5], alternative = "g")
+sup.10 <- t.test(d$len[supOJ & d$dose == 1],
+                 d$len[supVC & d$dose == 1], alternative = "g")
+sup.20 <- t.test(d$len[supOJ & d$dose == 2],
+                 d$len[supVC & d$dose == 2], alternative = "g")
+knitr::kable(
+    data.frame(Dose = c(0.5, 1.0, 2.0),
+               p.value = round(c(sup.05$p.value, sup.10$p.value, sup.20$p.value),3),
+               CI_low = round(c(sup.05$conf.int[1], sup.10$conf.int[1], sup.20$conf.int[1]), 3)),
+    col.names = c("Dose", "p-value", "$CI_{\\text{low}}$")
+)
+
+```
+
+The table shows p-palues and lower bounds of condidence interval for out t-tests. As can be seen, p-values for doses of 0.5 and 1 mg/day are much lower than alpha values for out confidence level (95 %), and confidence interval do not include zero. So, we can reject our null hypothesis and conclude that orange juce has larger effect on tooth growth that ascorbic acid at doses of 0.5 and 1 mg/day. However, there is no significant difference between oranje juice and ascorbic acid at dose of 2 mg/day due to the high p-value, that is much larger than out alpha.
+
+Now, let's run t-tests to see if `OJ` or `VC` at doses of 2 mg/day have greater effect on tooth growth than `OJ` at concentration 1 mg/day.
+First test: $H_0: \mu_{OJ, 2} = \mu_{OJ,1}, H_a: \mu_{OJ, 2} > \mu_{OJ,1}$:
+```{r}
+oj_vs_oj <- t.test(d$len[supOJ & d$dose == 2],
+                   d$len[supOJ & d$dose == 1], alternative = "g")
+```
+
+Second test: $H_0: \mu_{VC, 2} = \mu_{OJ,1}, H_a: \mu_{VC, 2} > \mu_{OJ,1}$:
+```{r}
+vc_vs_oj <- t.test(d$len[supVC & d$dose == 2],
+                   d$len[supOJ & d$dose == 1], alternative = "g")
+knitr::kable(
+    data.frame(H0 = c("$\\mu_{OJ, 2} = \\mu_{OJ,1}$",
+                      c("$\\mu_{VC, 2} = \\mu_{OJ,1}$")),
+               p.value = round(c(oj_vs_oj$p.value, vc_vs_oj$p.value), 3),
+               CI_low = round(c(oj_vs_oj$conf.int[1], vc_vs_oj$conf.int[1]),3)),
+    col.names = c("$H_0$", "p-value", "$CI_{\\text{low}}$")
+)
+```
+
+The table shows p-values and lower bounds for both hypothesis. In this case we can sagely reject the null hypothesis in favor of the alternative due to the low p-values, and conclude that orange juice and ascorbic acid at dose of 2 mg/day have greater effect on tooth growth that oranje juice at dose of 1 mg/day.
